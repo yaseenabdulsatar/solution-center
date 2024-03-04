@@ -1188,13 +1188,13 @@
                         "value": "[variables('lampCommon')]"
                     },
                     "subnetIdWeb": {
-                        "value": "[reference('networkTemplate').variables.subnetIdWeb]"
+                        "value": "[reference('networkTemplate').outputs.subnetIdWeb.value]"
                     },
                     "ctlrPubIpId": {
-                        "value": "[reference('networkTemplate').variables.ctlrPipID]"
+                        "value": "[reference('networkTemplate').outputs.ctlrPubIpId.value]"
                     },
                     "vmSetupParamsObj": {
-                        "value": "[reference('vmSetupParamsTemplate').variables.vmSetupParamsObj]"
+                        "value": "[reference('vmSetupParamsTemplate').outputs.vmSetupParamsObj.value]"
                     }
                 },
                 "templateLink": {
