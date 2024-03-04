@@ -122,7 +122,7 @@
                     }
                 },
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/solution-center/staging/solutions/azure-sqlmi-v1/nested/network.json"
+                    "uri": "https://raw.githubusercontent.com/yaseenabdulsatar/solution-center/staging/solutions/azure-sqlmi-v1/nested/network.json"
                 }
             }
         },
@@ -168,7 +168,7 @@
                     }
                 },
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/solution-center/staging/solutions/azure-sqlmi-v1/nested/managedInstance.json"
+                    "uri": "https://raw.githubusercontent.com/yaseenabdulsatar/solution-center/staging/solutions/azure-sqlmi-v1/nested/managedInstance.json"
                 }
             }
         },
@@ -199,7 +199,7 @@
                     }
                 },
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/solution-center/staging/solutions/azure-sqlmi-v1/nested/vm.json"
+                    "uri": "https://raw.githubusercontent.com/yaseenabdulsatar/solution-center/staging/solutions/azure-sqlmi-v1/nested/vm.json"
                 }
             }
         },
@@ -215,7 +215,7 @@
                     }
                 },
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/solution-center/staging/solutions/azure-sqlmi-v1/nested/keyVault.json"
+                    "uri": "https://raw.githubusercontent.com/yaseenabdulsatar/solution-center/staging/solutions/azure-sqlmi-v1/nested/keyVault.json"
                 }
             }
         }
