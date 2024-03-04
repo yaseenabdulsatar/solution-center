@@ -81,6 +81,11 @@
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('lampCommon').vmssdStorageAccounttName)]",
                 "[concat('Microsoft.Network/networkSecurityGroups/', parameters('lampCommon').vmssNsgName)]"
             ],
+      "plan": {
+        "name": "ubuntu-22",
+        "publisher": "yaseensmarket1645449809728",
+        "product": "ubuntu-22"
+      },
             "location": "[parameters('lampCommon').location]",
             "name": "[parameters('lampCommon').vmssName]",
             "properties": {
