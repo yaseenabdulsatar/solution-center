@@ -25,7 +25,7 @@ set -ex
 #parameters 
 {
     lamp_on_azure_configs_json_path=${1}
-
+    cd /var/lib/waagent/custom-script/download/0/
     . ./helper_functions.sh
 
     get_setup_params_from_configs_json $lamp_on_azure_configs_json_path || exit 99
