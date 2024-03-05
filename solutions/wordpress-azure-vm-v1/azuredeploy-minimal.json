@@ -23,7 +23,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
-            "name": "[concat('Deployment-SolutionCenter-Wordpress-Minimal', '_', parameters('epochTime'))]",
+            "name": "[concat('Wordpress-Minimal', '_', parameters('epochTime'))]",
             "properties": {
                 "mode": "Incremental",
                 "parameters": {
