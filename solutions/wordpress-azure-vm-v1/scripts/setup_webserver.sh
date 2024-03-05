@@ -392,3 +392,6 @@ echo "### Script End `date`###"
  sudo find /var/www/ -type d -exec chmod 750 {} \;
  sudo find /var/www/ -type f -exec chmod 640 {} \;
  sudo chown -R www-data:www-data /var/www
+ 
+ sudo find /var/www/ -type d -exec chmod 750 {} \;
+ sudo find /var/www/ -type f -exec chmod 640 {} \;
