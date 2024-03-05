@@ -2,12 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "counter": {
-            "metadata": {
-                "description": "from the copyindex function of calling template"
-            },
-            "type": "int"
-        },
         "lampCommon": {
             "metadata": {
                 "description": "Common LAMP values"
