@@ -113,7 +113,7 @@ set -ex
         # Get a new version of Postgres to match Azure version (default Xenial postgresql-client version--previous line--is 9.5)
         # Note that this was done after create_db, but before pg_dump cron job setup (no idea why). If this change
         # causes any pgres install issue, consider reverting this ordering change...
-        add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+        add-apt-repository -y "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
         wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
         apt-get update
         apt-get install -y postgresql-client-9.6
@@ -135,7 +135,7 @@ set -ex
     
     # install pre-requisites
     # apt-get install -y --fix-missing python-software-properties unzip
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
+    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
     sudo apt-get -y update > /dev/null 2>&1
      sudo apt-get -y install software-properties-common
     sudo apt-get -y install unzip
