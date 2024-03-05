@@ -24,7 +24,8 @@ set -ex
 echo "### Script Start `date`###"
 {
 lamp_on_azure_configs_json_path=${1}
-
+number=$(ls /var/lib/waagent/custom-script/download/)
+cd /var/lib/waagent/custom-script/download/$number/
 . ./helper_functions.sh
 
 get_setup_params_from_configs_json $lamp_on_azure_configs_json_path || exit 99
