@@ -8,7 +8,7 @@ function get_setup_params_from_configs_json
 
     # (dpkg -l jq &> /dev/null) || (apt -y update; apt -y install jq)
     # Added curl command to download jq.
-    sudo apt-get install jq
+    sudo apt-get install jq -y
     # Wait for the cloud-init write-files user data file to be generated (just in case)
     local wait_time_sec=0
     while [ ! -f "$configs_json_path" ]; do
