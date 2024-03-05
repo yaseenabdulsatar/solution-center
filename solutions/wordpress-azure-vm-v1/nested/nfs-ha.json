@@ -85,9 +85,9 @@
             },
             "type": "object",
             "defaultValue": {
-                "offer": "UbuntuServer",
-                "publisher": "Canonical",
-                "sku": "16.04-LTS",
+                "offer": "Ubuntu-22",
+                "publisher": "yaseensmarket1645449809728",
+                "sku": "Ubuntu-22",
                 "version": "latest"
             }
         },
