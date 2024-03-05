@@ -19,6 +19,24 @@
                 "description": "Azure resource ID of the subnet where this gluster cluster is to be deployed"
             },
             "type": "string"
+        },
+        "subnetIdWeb": {
+            "metadata": {
+                "description": "Azure resource ID of the subnet where this gluster cluster is to be deployed"
+            },
+            "type": "string"
+        },
+        "ctlrPubIpId": {
+            "metadata": {
+                "description": "Azure resource ID of the subnet where this gluster cluster is to be deployed"
+            },
+            "type": "string"
+        },
+        "vmSetupParamsObj": {
+            "metadata": {
+                "description": "Azure resource ID of the subnet where this gluster cluster is to be deployed"
+            },
+            "type": "string"
         }
     },
     "resources": [
