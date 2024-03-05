@@ -23,7 +23,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
-            "name": "[concat('Deployment-SolutionCenter-Wordpress-Maximal', '_', parameters('epochTime'))]",
+            "name": "[concat('Wordpress-Maximal', '_', parameters('epochTime'))]",
             "properties": {
                 "mode": "Incremental",
                 "parameters": {
