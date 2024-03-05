@@ -617,7 +617,7 @@ server {
 
         # Use a higher keepalive timeout to reduce the need for repeated handshakes
         keepalive_timeout 300s; # up from 75 secs default
-        ssl on;
+        #ssl on;
         ssl_certificate ${certsDir}/nginx.crt;
         ssl_certificate_key ${certsDir}/nginx.key;
 
