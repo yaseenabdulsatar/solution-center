@@ -68,7 +68,7 @@ set -ex
 
     #Updating php sources
     sudo add-apt-repository ppa:ondrej/php -y
-    sudo apt-get update
+    sudo apt-get update -y
 
     # make sure system does automatic updates and fail2ban
     export DEBIAN_FRONTEND=noninteractive
@@ -115,7 +115,7 @@ set -ex
         # causes any pgres install issue, consider reverting this ordering change...
         add-apt-repository -y "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
         wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-        apt-get update
+        apt-get update -y
         apt-get install -y postgresql-client-9.6
     fi
 
