@@ -66,7 +66,7 @@ set -ex
     echo $frontDoorFQDN >> /tmp/vars.txt
 
     check_fileServerType_param $fileServerType
-
+    wpPath=/azlamp/html/$siteFQDN
         cat > /home/azureadmin/.profile << EOF
         # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
@@ -96,10 +96,10 @@ Welcome to Wordpress Controller VM
 ------------------------------NOTES------------------------------------
 . DO NOT delete the main wordpress folder $wpPath, YET you can empty that folder
 . ONLY USE the command 'wp' to update/install the plugins/core-wordpress-installation
-. The command 'wp' should be used as root with the flag '--allow-root' and '--path=#wpPath'
-example: 'wp plugin install --activate akismet --path=$path --allow-root'
+. The command 'wp' should be used as root with the flag '--allow-root' and '--path=$wpPath'
+example: 'wp plugin install akismet --activate --path=$path --allow-root'
 . After the installation/update of any plugins toy should also run this command:
-sudo chown -R www-data:www-data $wpPath
+sudo chown -R www-data:www-data /azlamp/
 ----------------------------------------------------------------------
 "
         EOF
