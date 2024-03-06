@@ -606,7 +606,7 @@ function config_one_site_on_vmss
 
   local certsDir="/azlamp/certs/$siteFQDN"
   local PhpVer=$(get_php_version)
-
+if [ "$(ls $certsDir)" != "" ]; then
   if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
     cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
@@ -654,7 +654,7 @@ upstream backend {
 }  
 EOF
   fi
-
+fi
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
