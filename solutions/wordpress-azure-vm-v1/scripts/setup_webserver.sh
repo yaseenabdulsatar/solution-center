@@ -74,6 +74,13 @@ check_fileServerType_param $fileServerType
 
   # install pre-requisites including VARNISH and PHP-FPM
   export DEBIAN_FRONTEND=noninteractive
+ apt-get --yes \
+    --no-install-recommends \
+    -qq -o=Dpkg::Use-Pty=0 \
+    -o Dpkg::Options::="--force-confdef" \
+    -o Dpkg::Options::="--force-confold" \
+    update
+  
   apt-get --yes \
     --no-install-recommends \
     -qq -o=Dpkg::Use-Pty=0 \
