@@ -36,6 +36,6 @@
         "documentation4": "",
         "v2Vm": "vm;iaasvmcontainerv2;",
         "v2VmContainer": "iaasvmcontainer;iaasvmcontainerv2;",
-        "v2VmType": "Microsoft.Compute/virtualMachines"
+        "v2VmType": "Microsoft.ClassicCompute/virtualMachines"
     }
 }
