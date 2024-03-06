@@ -278,6 +278,47 @@ EOF
         local httpProtocol="http://"
         local wpHome="$httpProtocol$frontDoorFQDN"
 
+
+
+        cat > /home/azureadmin/.profile << EOF
+        # ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "\$HOME/.bashrc" ]; then
+        . "\$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "\$HOME/bin" ] ; then
+    PATH="\$HOME/bin:\$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "\$HOME/.local/bin" ] ; then
+    PATH="\$HOME/.local/bin:\$PATH"
+fi
+echo "----------------------------------------------------------------------
+Welcome to Wordpress Controller VM
+------------------------------NOTES------------------------------------
+. DO NOT delete the main wordpress folder $wpPath, YET you can empty that folder
+. ONLY USE the command 'wp' to update/install the plugins/core-wordpress-installation
+. The command 'wp' should be used as root with the flag '--allow-root' and '--path=#wpPath'
+. After the installation/update of any plugins toy should also run this command:
+sudo chown -R www-data:www-data $wpPath
+----------------------------------------------------------------------
+"
+        EOF
         # Creates a Database for CMS application
         #create_database $dbIP $dbadminloginazure $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass
         # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
