@@ -9,7 +9,7 @@ decotext=`echo ${2} | base64 --decode`
 
 wget_script(){
   cd /home/"${1}"/ 
-  wget https://raw.githubusercontent.com/Azure/LAMP/master/scripts/moodle_script.sh
+  wget https://raw.githubusercontent.com/yaseenabdulsatar/LAMP/master/scripts/moodle_script.sh
   sudo chown -R "${1}":"${1}" /home/"${1}"/moodle_script.sh
 }
 wget_script ${1}
