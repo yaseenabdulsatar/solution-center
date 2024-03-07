@@ -681,12 +681,6 @@ server {
 }
 
 EOF
-cat > /etc/nginx/sites-enabled/default.conf << EOF
-upstream backend {
-        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
-} 
-EOF
 } # function config_one_site_on_vmss
 
 function config_all_sites_on_vmss
