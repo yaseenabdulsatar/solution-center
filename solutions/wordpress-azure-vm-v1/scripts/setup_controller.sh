@@ -92,20 +92,6 @@ if [ -d "\$HOME/.local/bin" ] ; then
     PATH="\$HOME/.local/bin:\$PATH"
 fi
 echo "----------------------------------------------------------------------
-Welcome to Wordpress Controller VM
-------------------------------NOTES------------------------------------
-1) DO NOT delete the main wordpress folder $wpPath, YET you can empty that folder.
-2) ONLY USE the command 'wp' to update/install the plugins/core-wordpress-installation.
-3) The command 'wp' should be used as root and also with the flag '--allow-root' and '--path=$wpPath'.
-example: 'wp plugin install akismet --activate --path=$path --allow-root'
-4) After the installation/update of any plugins toy should also run this command:
-sudo chown -R www-data:www-data /azlamp/
-5) Instead of installing a certificate on this VM an replicate it to the VMSS-
- . you can use the 'Azure Front Door' resource [which is supposed to be deployed alongside this VM] -
- . in the left side of the Front Door resource look for the [Front Door designer] -
- . add your Custom Domain and make sure to enable the [CUSTOM DOMAIN HTTPS]-
- . change the Routing rules to include you custom domain and finally safe the changes.
-
  Welcome to the Wordpress Controller VM
 
 Important Guidelines:
