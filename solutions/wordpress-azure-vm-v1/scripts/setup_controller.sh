@@ -117,7 +117,7 @@ sudo chown -R www-data:www-data /azlamp/
 . Save your modifications to effectuate these changes.
 ----------------------------------------------------------------------
 "
-        EOF
+EOF
     #Updating php sources
     sudo add-apt-repository ppa:ondrej/php -y
     sudo apt-get update -y
