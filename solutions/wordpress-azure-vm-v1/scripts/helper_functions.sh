@@ -647,11 +647,7 @@ server {
           fastcgi_index index.php;
           include fastcgi_params;
         }
-}
-upstream backend {
-        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
-}  
+} 
 EOF
   fi
 fi
@@ -684,6 +680,12 @@ server {
         }
 }
 
+EOF
+cat <<EOF >> /etc/nginx/sites-enabled/default.conf
+upstream backend {
+        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+} 
 EOF
 } # function config_one_site_on_vmss
 
@@ -774,6 +776,7 @@ function create_per_site_nginx_conf_on_controller
     local htmlDir=${3}          # E.g., /azlamp/html/site1.org
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
 
+if [ "$(ls $certsDir)" != "" ]; then
     if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
     cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
@@ -812,7 +815,7 @@ server {
 }
 EOF
   fi
-
+fi
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
