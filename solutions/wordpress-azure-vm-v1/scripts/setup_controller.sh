@@ -98,9 +98,9 @@ Important Guidelines:
 
 1) Please don't delete the primary Wordpress directory, identified as $wpPath. However, you can clear the contents within this directory if necessary.
 
-2) Wordpress Plugins install: For all operations concerning the update or installation of plugins and core Wordpress installation, exclusively utilize the 'wp' command.
+2) Wordpress Plugins install: ONLY USE the command 'wp' to update or install a plugins and core Wordpress installation.
 
-3) NOTE: It is imperative to execute the wp command as the root user, AND you must include the flags --allow-root and --path=$wpPath. For example:
+3) NOTE: It is imperative to execute the 'wp' command as the root user, AND you must include the flags --allow-root and --path=$wpPath. For example:
 
 sudo wp plugin install akismet --activate --path=$wpPath --allow-root
 
