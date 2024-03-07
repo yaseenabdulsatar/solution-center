@@ -96,19 +96,19 @@ echo "----------------------------------------------------------------------
 
 Important Guidelines:
 
-1) Preservation of Wordpress Directory: Please refrain from deleting the primary Wordpress directory, identified as $wpPath. However, you are permitted to clear the contents within this directory if necessary.
+1) Please don't delete the primary Wordpress directory, identified as $wpPath. However, you can clear the contents within this directory if necessary.
 
-2) Wordpress Command Usage: For all operations concerning the update or installation of plugins and core Wordpress installation, exclusively utilize the wp command.
+2) Wordpress Plugins install: For all operations concerning the update or installation of plugins and core Wordpress installation, exclusively utilize the 'wp' command.
 
-3) Execution of 'wp' Command: It is imperative to execute the wp command as the root user, incorporating the flags --allow-root and --path=$wpPath for all operations. An illustrative example is provided for clarity:
+3) NOTE: It is imperative to execute the wp command as the root user, AND you must include the flags --allow-root and --path=$wpPath. For example:
 
-wp plugin install akismet --activate --path=$wpPath --allow-root
+sudo wp plugin install akismet --activate --path=$wpPath --allow-root
 
-4) Post-Installation File Ownership Adjustment: Following the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
+4) NOT2: After the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
 
 sudo chown -R www-data:www-data /azlamp/
 
-5) SSL/TLS Certificate Considerations: Rather than installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
+5) SSL/TLS Certificate Considerations: Instead of installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
 
 . Navigate to the 'Front Door designer'.
 . Add your Custom Domain.
@@ -116,7 +116,7 @@ sudo chown -R www-data:www-data /azlamp/
 . Adjust the Routing Rules to encompass your custom domain.
 . Save your modifications to effectuate these changes.
 ----------------------------------------------------------------------
-NOW run this command 'cat wordpress.txt' to get the credentials for the wordpress installation
+NOW [wait for 5 minutes] and then run this command 'cat wordpress.txt' to get the credentials for the wordpress installation
 "
 EOF
     #Updating php sources
