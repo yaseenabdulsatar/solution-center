@@ -105,6 +105,30 @@ sudo chown -R www-data:www-data /azlamp/
  . in the left side of the Front Door resource look for the [Front Door designer] -
  . add your Custom Domain and make sure to enable the [CUSTOM DOMAIN HTTPS]-
  . change the Routing rules to include you custom domain and finally safe the changes.
+
+ Welcome to the Wordpress Controller VM
+
+Important Guidelines:
+
+1) Preservation of Wordpress Directory: Please refrain from deleting the primary Wordpress directory, identified as $wpPath. However, you are permitted to clear the contents within this directory if necessary.
+
+2) Wordpress Command Usage: For all operations concerning the update or installation of plugins and core Wordpress installation, exclusively utilize the wp command.
+
+3) Execution of 'wp' Command: It is imperative to execute the wp command as the root user, incorporating the flags --allow-root and --path=$wpPath for all operations. An illustrative example is provided for clarity:
+
+wp plugin install akismet --activate --path=$wpPath --allow-root
+
+4) Post-Installation File Ownership Adjustment: Following the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
+
+sudo chown -R www-data:www-data /azlamp/
+
+5) SSL/TLS Certificate Considerations: Rather than installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
+
+. Navigate to the 'Front Door designer'.
+. Add your Custom Domain.
+. Ensure that the 'CUSTOM DOMAIN HTTPS' option is enabled.
+. Adjust the Routing Rules to encompass your custom domain.
+. Save your modifications to effectuate these changes.
 ----------------------------------------------------------------------
 "
         EOF
