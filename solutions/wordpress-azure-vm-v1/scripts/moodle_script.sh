@@ -26,7 +26,7 @@ install_svn() {
 }
 run_moodle_playbook() {
     cd /home/${3}
-    svn checkout https://github.com/Azure/LAMP/trunk/scripts/ansiblePlaybook/moodle
+    svn checkout https://github.com/yaseenabdulsatar/LAMP/trunk/scripts/ansiblePlaybook/moodle
     sudo sed -i "s~vm_ip: IP~vm_ip: ${1}~" ${vars_path}
     sudo sed -i "s~vm_password: password~vm_password: ${2}~" ${vars_path}
     sudo sed -i "s~user_name: azusername~user_name: ${3}~" ${vars_path}
