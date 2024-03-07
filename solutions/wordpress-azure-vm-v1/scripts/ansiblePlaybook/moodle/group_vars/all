@@ -20,7 +20,7 @@ moodle_db_pass:
 
 version: 3.8.3
 moodle_download_url: https://download.moodle.org/stable38/moodle
-replication_url: https://raw.githubusercontent.com/Azure/LAMP/master/scripts/moodle_replication.sh
+replication_url: https://raw.githubusercontent.com/yaseenabdulsatar/LAMP/master/scripts/moodle_replication.sh
 repli_script_name: moodle_replication.sh
 
 webroot: /var/www/html
