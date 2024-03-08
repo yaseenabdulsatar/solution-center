@@ -275,7 +275,7 @@ http {
 EOF
 
   # Set up html dir local copy if specified
-  htmlRootDir="/var/www/html/${siteFQDN}"
+  htmlRootDir="/azlamp/html/${siteFQDN}"
   if [ "$htmlLocalCopySwitch" = "true" ]; then
     if [ "$fileServerType" = "azurefiles" ]; then
         mkdir -p /var/www/html
