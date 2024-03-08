@@ -13,7 +13,7 @@ wp_db_user_pass=$(</dev/urandom tr -dc _A-Z-a-z-0-9 | head -c8)
 
 install_ansible() {
   sudo apt-add-repository ppa:ansible/ansible -y
-  sudo apt-get update
+  sudo apt-get update -y
   sudo apt-get install ansible -y
 }
 configure_ansible() {
