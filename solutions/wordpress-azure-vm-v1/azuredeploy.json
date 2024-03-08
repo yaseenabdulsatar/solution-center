@@ -163,11 +163,11 @@
             "type": "string"
         },
         "UbuntuVersion": {
-            "defaultValue": "ubuntu-22",
+            "defaultValue": "ubuntu-server-22",
             "allowedValues": [
                 "16.04-LTS",
                 "22.04-LTS",
-				"ubuntu-22"
+		"ubuntu-server-22"
             ],
             "type": "string",
             "metadata": {
@@ -633,27 +633,27 @@
         },
         "ctlrVmOsImageReferenceOfferName": {
             "type": "string",
-            "defaultValue": "ubuntu-22",
-            "allowedValues": [ "ubuntu-22" ],
+            "defaultValue": "ubuntu-server-22",
+            "allowedValues": [ "ubuntu-server-22" ],
             "metadata": {
                 "description": "Specifies the offer of the markeplate OS image used to create Controller VM."
             }
         },
         "ctlrVmOsImageReferencePublisherName": {
             "type": "string",
-            "defaultValue": "yaseensmarket1645449809728",
-            "allowedValues": [ "yaseensmarket1645449809728" ],
+            "defaultValue": "zainabmarket",
+            "allowedValues": [ "zainabmarket" ],
             "metadata": {
                 "description": "The image publisher of the markeplate OS image used to create Controller VM."
             }
         },
         "ctlrVmOsImageReferenceSkuName": {
             "type": "string",
-            "defaultValue": "ubuntu-22",
+            "defaultValue": "ubuntu-server-22",
             "allowedValues": [
                 "16.04-LTS",
                 "22.04-LTS",
-				"ubuntu-22"
+		"ubuntu-server-22"
             ],
             "metadata": {
                 "description": "The image SKU of the markeplate OS image used to create Controller VM."
@@ -758,27 +758,27 @@
         },
         "vmssOsImageReferenceOfferName": {
             "type": "string",
-            "defaultValue": "ubuntu-22",
-            "allowedValues": [ "ubuntu-22" ],
+            "defaultValue": "ubuntu-server-22",
+            "allowedValues": [ "ubuntu-server-22" ],
             "metadata": {
                 "description": "Specifies the offer of the markeplate OS image used to create instance of the VMSS resource for web server."
             }
         },
         "vmssOsImageReferencePublisherName": {
             "type": "string",
-            "defaultValue": "yaseensmarket1645449809728",
-            "allowedValues": [ "yaseensmarket1645449809728" ],
+            "defaultValue": "zainabmarket",
+            "allowedValues": [ "zainabmarket" ],
             "metadata": {
                 "description": "The image publisher of the markeplate OS image used to create instance of the VMSS resource for web server."
             }
         },
         "vmssOsImageReferenceSkuName": {
             "type": "string",
-            "defaultValue": "ubuntu-22",
+            "defaultValue": "ubuntu-server-22",
             "allowedValues": [
                 "16.04-LTS",
                 "22.04-LTS",
-				"ubuntu-22"
+		"ubuntu-server-22"
             ],
             "metadata": {
                 "description": "The image SKU of the markeplate OS image used to create instance of the VMSS resource for web server."
@@ -1548,8 +1548,8 @@
             "nfsHaNode1IP": "[concat(variables('subnetSanPrefix'), '.120')]",
             "osDiskStorageType": "[parameters('osDiskStorageType')]",
             "osType": {
-                "offer": "ubuntu-22",
-                "publisher": "yaseensmarket1645449809728",
+                "offer": "ubuntu-server-22",
+                "publisher": "zainabmarket",
                 "sku": "[parameters('UbuntuVersion')]",
                 "version": "latest"
             },
