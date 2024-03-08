@@ -116,7 +116,7 @@ sudo chown -R www-data:www-data /azlamp/
 . Adjust the Routing Rules to encompass your custom domain.
 . Save your modifications to effectuate these changes.
 ----------------------------------------------------------------------
-NOW [wait for 5 minutes] and then run this command 'cat wordpress.txt' to get the credentials for the main wordpress installation
+NOW run this command 'cat wordpress.txt' to get the credentials for the main wordpress installation, if the coomand faild then [wait for 5 minutes] and try again.
 "
 EOF
     #Updating php sources
