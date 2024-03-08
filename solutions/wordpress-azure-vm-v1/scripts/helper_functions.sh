@@ -612,7 +612,7 @@ if [ "$(ls $certsDir)" != "" ]; then
 fi
   if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
-    cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
+    cat > /etc/nginx/sites-enabled/${siteFQDN}.conf << EOF
 server {
         listen 443 ssl http2;
         index index.php index.html index.htm;
@@ -650,10 +650,7 @@ server {
           fastcgi_index index.php;
           include fastcgi_params;
         }
-} 
-EOF
-  fi
-  cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
+}
 server {
         listen 80;
 	      index index.php index.html index.htm;
@@ -681,8 +678,8 @@ server {
           include fastcgi_params;
         }
 }
-
 EOF
+  fi
 } # function config_one_site_on_vmss
 
 function config_all_sites_on_vmss
@@ -771,13 +768,14 @@ function create_per_site_nginx_conf_on_controller
     local httpsTermination=${2} # "None", "VMSS", etc
     local htmlDir=${3}          # E.g., /azlamp/html/site1.org
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
+    local htmlRootDir="/azlamp/html/$siteFQDN"
 if [ "$(ls $certsDir)" != "" ]; then
    mkdir $certsDir
   generate_sslcerts $siteFQDN
 fi
     if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
-    cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
+    cat > /etc/nginx/sites-enabled/${siteFQDN}.conf << EOF
 server {
         listen 443 ssl http2;
         index index.php index.html index.htm;
@@ -785,7 +783,7 @@ server {
 
         # Use a higher keepalive timeout to reduce the need for repeated handshakes
         keepalive_timeout 300s; # up from 75 secs default
-        ssl on;
+        #ssl on;
         ssl_certificate ${certsDir}/nginx.crt;
         ssl_certificate_key ${certsDir}/nginx.key;
 
@@ -811,9 +809,6 @@ server {
           include fastcgi_params;
         }
 }
-EOF
-  fi
-  cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
 	      index index.php index.html index.htm;
@@ -843,6 +838,7 @@ server {
 }
 
 EOF
+fi
 }
 
 function create_per_site_nginx_ssl_certs_on_controller
