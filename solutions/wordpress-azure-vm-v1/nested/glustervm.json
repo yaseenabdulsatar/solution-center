@@ -52,9 +52,9 @@
                 "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
             ],
       "plan": {
-        "name": "ubuntu-22",
-        "publisher": "yaseensmarket1645449809728",
-        "product": "ubuntu-22"
+        "name": "ubuntu-server-22",
+        "publisher": "zainabmarket",
+        "product": "ubuntu-server-22"
       },
             "location": "[parameters('lampCommon').location]",
             "name": "[variables('vmName')]",
