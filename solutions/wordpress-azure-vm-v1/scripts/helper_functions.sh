@@ -510,7 +510,7 @@ function configure_nfs_client_and_mount {
 }
 
 SERVER_TIMESTAMP_FULLPATH="/azlamp/html/.last_modified_time.azlamp"
-LOCAL_TIMESTAMP_FULLPATH="/var/www/html/.last_modified_time.azlamp"
+LOCAL_TIMESTAMP_FULLPATH="/azlamp/html/.last_modified_time.azlamp"
 
 # Create a script to sync /azlamp/html (gluster/NFS) and /var/www/html (local) and set up a minutely cron job
 # Should be called by root and only on a VMSS web frontend VM
@@ -599,7 +599,7 @@ function config_one_site_on_vmss
 
   # Find the correct htmlRootDir depending on the htmlLocalCopySwitch
   if [ "$htmlLocalCopySwitch" = "true" ]; then
-    local htmlRootDir="/var/www/html/$siteFQDN"
+    local htmlRootDir="/azlamp/html/$siteFQDN"
   else
     local htmlRootDir="/azlamp/html/$siteFQDN"
   fi
