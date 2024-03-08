@@ -607,6 +607,8 @@ function config_one_site_on_vmss
   local certsDir="/azlamp/certs/$siteFQDN"
   local PhpVer=$(get_php_version)
 if [ "$(ls $certsDir)" != "" ]; then
+  generate_sslcerts $siteFQDN
+fi
   if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
     cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
@@ -650,7 +652,6 @@ server {
 } 
 EOF
   fi
-fi
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
@@ -769,8 +770,9 @@ function create_per_site_nginx_conf_on_controller
     local httpsTermination=${2} # "None", "VMSS", etc
     local htmlDir=${3}          # E.g., /azlamp/html/site1.org
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
-
 if [ "$(ls $certsDir)" != "" ]; then
+  generate_sslcerts $siteFQDN
+fi
     if [ "$httpsTermination" = "VMSS" ]; then
     # Configure nginx/https
     cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
@@ -809,7 +811,6 @@ server {
 }
 EOF
   fi
-fi
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
