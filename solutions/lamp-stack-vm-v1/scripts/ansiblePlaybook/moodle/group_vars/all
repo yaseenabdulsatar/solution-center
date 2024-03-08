@@ -23,7 +23,7 @@ moodle_download_url: https://download.moodle.org/stable38/moodle
 replication_url: https://raw.githubusercontent.com/yaseenabdulsatar/LAMP/master/scripts/moodle_replication.sh
 repli_script_name: moodle_replication.sh
 
-webroot: /var/www/html
+webroot: /azlamp/html
 moodle_data_direc_path: /azlamp/moodledata
 moodle_download_path: /tmp/moodle
 default_permission: www-data
