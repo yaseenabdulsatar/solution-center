@@ -106,9 +106,9 @@
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('lampCommon').ctlrNicName)]"
             ],
       "plan": {
-        "name": "ubuntu-22",
-        "publisher": "yaseensmarket1645449809728",
-        "product": "ubuntu-22"
+        "name": "ubuntu-server-22",
+        "publisher": "zainabmarket",
+        "product": "ubuntu-server-22"
       },
             "location": "[parameters('lampCommon').location]",
             "name": "[parameters('lampCommon').ctlrVmName]",
