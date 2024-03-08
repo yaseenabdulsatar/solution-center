@@ -40,7 +40,7 @@ default_permission: www-data
 woocommerce_script_name: woocommerce.sh
 replication_name: wordpress_replication.sh
 
-webroot: /var/www/html
+webroot: /azlamp/html
 wordpress_path: /tmp/wordpress
 
 wordpress_url: https://wordpress.org/wordpress
