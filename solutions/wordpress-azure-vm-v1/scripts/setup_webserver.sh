@@ -274,7 +274,7 @@ http {
 EOF
 
   # Set up html dir local copy if specified
-  htmlRootDir="/azlamp/html/${siteFQDN}"
+  htmlRootDir="/var/www /html/${siteFQDN}"
   if [ "$htmlLocalCopySwitch" = "true" ]; then
     if [ "$fileServerType" = "azurefiles" ]; then
         mkdir -p /var/www/html
@@ -302,7 +302,7 @@ EOF
     fi
     if [ "$fileServerType" = "nfs" -o "$fileServerType" = "nfs-ha" -o "$fileServerType" = "nfs-byo" -o "$fileServerType" = "gluster" ]; then
         mkdir -p /var/www/html
-        #rsync -av --delete /azlamp/html/. $htmlRootDir
+        rsync -av --delete /azlamp/html/. $htmlRootDir
         chown www-data:www-data -R $htmlRootDir && sync
         setup_html_local_copy_cron_job
      fi   
