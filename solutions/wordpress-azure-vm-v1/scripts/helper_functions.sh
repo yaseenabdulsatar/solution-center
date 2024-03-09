@@ -97,7 +97,7 @@ function download_wordpress {
     mv $wordpressPath/wordpress $wordpressPath/$siteFQDN
 }
 
-function create_wpconfig {
+function create_wpig {
     local dbIP=$1
     local applicationDbName=$2
     local dbadminloginazure=$3
@@ -107,16 +107,16 @@ function create_wpconfig {
     
     SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/) 
 
-    cat <<EOF >/azlamp/html/$siteFQDN/wp-config.php
+    cat <<EOF >/azlamp/html/$siteFQDN/wp-ig.php
   <?php
   /**
-  * Following configration file will be updated in the wordpress folder in runtime 
+  * Following igration file will be updated in the wordpress folder in runtime 
   *
-  * Following configurations: Azure Database for MySQL server settings, Table Prefix,
+  * Following igurations: Azure Database for MySQL server settings, Table Prefix,
   * Secret Keys, WordPress Language, and ABSPATH. 
   * 
-  * wp-config.php  file is used during the installation.
-  * Copy the wp-config file to wordpress folder.
+  * wp-ig.php  file is used during the installation.
+  * Copy the wp-ig file to wordpress folder.
   *
   */
   // ** Azure Database for MySQL server settings - You can get the following details from Azure Portal** //
@@ -253,7 +253,7 @@ function install_php_mssql_driver
 {
     # Download and build php/mssql driver
     /usr/bin/curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-    /usr/bin/curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+    /usr/bin/curl https://packages.microsoft.com/ig/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
     sudo apt-get update
     sudo ACCEPT_EULA=Y apt-get install msodbcsql mssql-tools unixodbc-dev -y
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
@@ -641,7 +641,9 @@ server {
         # Server Logs
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
-
+	location / {
+	    try_files $uri $uri/ /index.php?$args;
+	}
         root ${htmlRootDir};
         location ~* \.php$ {
           include fastcgi_params;
@@ -669,7 +671,9 @@ server {
         # Server Logs
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
- 
+ 	location / {
+	    try_files $uri $uri/ /index.php?$args;
+	}
         root ${htmlRootDir};
         location ~* \.php$ {
           include fastcgi_params;
@@ -802,7 +806,9 @@ server {
         # Server Logs
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
-
+	location / {
+	    try_files $uri $uri/ /index.php?$args;
+	}
         root ${htmlRootDir};
         location ~* \.php$ {
           include fastcgi_params;
@@ -829,7 +835,9 @@ server {
         # Server Logs
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
- 
+ 	location / {
+	    try_files $uri $uri/ /index.php?$args;
+	}
         root ${htmlRootDir};
         location ~* \.php$ {
           include fastcgi_params;
