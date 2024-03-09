@@ -308,7 +308,7 @@ EOF
     if [ "$fileServerType" = "nfs" -o "$fileServerType" = "nfs-ha" -o "$fileServerType" = "nfs-byo" -o "$fileServerType" = "gluster" ]; then
         mkdir -p /var/www/html
         #rsync -av --delete /azlamp/html/. $htmlRootDir
-        sudo ln -s /azlamp/html /var/www/html
+        sudo ln -s /azlamp/html/ /var/www/html/
         chown www-data:www-data -R $htmlRootDir && sync
         setup_html_local_copy_cron_job
      fi   
