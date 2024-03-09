@@ -299,7 +299,8 @@ function create_azure_files_share
         --name $shareName \
         --account-name $storageAccountName \
         --account-key $storageAccountKey \
-        --fail-on-exist >> $logFilePath
+        --fail-on-exist >> $logFilePath \
+        --quota $fileServerDiskSize
 }
 
 function setup_and_mount_gluster_share
