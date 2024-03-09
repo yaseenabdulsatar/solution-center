@@ -657,7 +657,8 @@ server {
 	location / {
 	    try_files \$uri \$uri/ /index.php?\$args;
 	}
-        root ${htmlRootDir};
+        #root ${htmlRootDir};
+	root /var/www/html/$siteFQDN;
         location ~* \.php$ {
           include fastcgi_params;
           # Remove X-Powered-By, which is an information leak
@@ -687,8 +688,9 @@ server {
  	location / {
 	    try_files \$uri \$uri/ /index.php?\$args;
 	}
-        root ${htmlRootDir};
-        location ~* \.php$ {
+        $root ${htmlRootDir};
+        root /var/www/html/$siteFQDN;
+	location ~* \.php$ {
           include fastcgi_params;
           # Remove X-Powered-By, which is an information leak
           fastcgi_hide_header X-Powered-By;
@@ -822,8 +824,9 @@ server {
 	location / {
 	    try_files \$uri \$uri/ /index.php?\$args;
 	}
-        root ${htmlRootDir};
-        location ~* \.php$ {
+        #root ${htmlRootDir};
+        root /var/www/html/$siteFQDN;
+	location ~* \.php$ {
           include fastcgi_params;
           # Remove X-Powered-By, which is an information leak
           fastcgi_hide_header X-Powered-By;
@@ -851,8 +854,9 @@ server {
  	location / {
 	    try_files \$uri \$uri/ /index.php?\$args;
 	}
-        root ${htmlRootDir};
-        location ~* \.php$ {
+        #root ${htmlRootDir};
+        root /var/www/html/$siteFQDN;
+	location ~* \.php$ {
           include fastcgi_params;
           # Remove X-Powered-By, which is an information leak
           fastcgi_hide_header X-Powered-By;
