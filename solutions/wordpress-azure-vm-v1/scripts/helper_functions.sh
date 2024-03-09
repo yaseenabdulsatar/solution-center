@@ -726,7 +726,7 @@ function reset_all_sites_on_vmss
   local httpsTermination=${2}     # "VMSS" or "None"
 
   rm /etc/nginx/sites-enabled/*
-  cat > /etc/nginx/sites-available/default << EOF
+  cat > /etc/nginx/sites-enabled2/default << EOF
 upstream backend {
         server unix:/run/php/php8.2-fpm.sock fail_timeout=1s;
         server unix:/run/php/php8.2-fpm-backup.sock backup;
@@ -789,7 +789,7 @@ http {
 
   include /etc/nginx/conf.d/*.conf;
   include /etc/nginx/sites-enabled/*;
-  include /etc/nginx/sites-available/*;
+  include /etc/nginx/sites-enabled2/*;
 }
 EOF
 }
