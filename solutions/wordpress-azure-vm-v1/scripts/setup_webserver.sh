@@ -55,8 +55,8 @@ check_fileServerType_param $fileServerType
 mkdir -p /etc/nginx/sites-available/
 cat > /etc/nginx/sites-available/default << EOF
 upstream backend {
-        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+        server unix:/run/php/php${phpVersion}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${phpVersion}-fpm-backup.sock backup;
 } 
 EOF
   # make sure the system does automatic update
