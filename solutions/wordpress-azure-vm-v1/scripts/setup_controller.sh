@@ -67,7 +67,7 @@ set -ex
 
     check_fileServerType_param $fileServerType
     wpPath=/azlamp/html/$siteFQDN
-        cat > /home/azureadmin/.profile << EOF
+        cat > /home/$sshUsername/.profile << EOF
         # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
