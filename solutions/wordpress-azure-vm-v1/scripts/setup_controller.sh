@@ -120,13 +120,17 @@ NOW run this command 'cat wordpress.txt' to get the credentials for the main wor
 "
 EOF
     #Updating php sources
+    check_apt_locks
     sudo add-apt-repository ppa:ondrej/php -y
+    check_apt_locks
     sudo apt-get update -y
 
     # make sure system does automatic updates and fail2ban
     export DEBIAN_FRONTEND=noninteractive
+    check_apt_locks
     apt-get -y update
     # TODO: ENSURE THIS IS CONFIGURED CORRECTLY
+    check_apt_locks
     apt-get -y install unattended-upgrades fail2ban
 
     config_fail2ban
@@ -136,39 +140,50 @@ EOF
 
     if [ $fileServerType = "gluster" ]; then
         # configure gluster repository & install gluster client
+        check_apt_locks
         add-apt-repository ppa:gluster/glusterfs-3.10 -y                 >> /tmp/apt1.log
     elif [ $fileServerType = "nfs" ]; then
         # configure NFS server and export
         setup_raid_disk_and_filesystem /azlamp /dev/md1 /dev/md1p1
         configure_nfs_server_and_export /azlamp
     fi
-
+    check_apt_locks
     apt-get -y update                                                   >> /tmp/apt2.log
+    check_apt_locks
     apt-get -y --force-yes install rsyslog git                          >> /tmp/apt3.log
 
     if [ $fileServerType = "gluster" ]; then
         apt-get -y --force-yes install glusterfs-client                 >> /tmp/apt3.log
+        check_apt_locks
     elif [ "$fileServerType" = "azurefiles" ]; then
         # install azure cli & setup container
         AZ_REPO=$(lsb_release -cs)
         echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |  tee /etc/apt/sources.list.d/azure-cli.list
         curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - >> /tmp/apt3.log
+        check_apt_locks
         sudo apt-get -y install apt-transport-https >> /tmp/apt3.log
+        check_apt_locks
         sudo apt-get -y update > /dev/null
+        check_apt_locks
         sudo apt-get -y install azure-cli >> /tmp/apt3.log
+        check_apt_locks
         apt-get -y --force-yes install cifs-utils >> /tmp/apt3.log
     fi
 
     if [ $dbServerType = "mysql" ]; then
+        check_apt_locks
         apt-get -y --force-yes install mysql-client >> /tmp/apt3.log
     elif [ "$dbServerType" = "postgres" ]; then
         #apt-get -y --force-yes install postgresql-client >> /tmp/apt3.log
         # Get a new version of Postgres to match Azure version (default Xenial postgresql-client version--previous line--is 9.5)
         # Note that this was done after create_db, but before pg_dump cron job setup (no idea why). If this change
         # causes any pgres install issue, consider reverting this ordering change...
+        check_apt_locks
         add-apt-repository -y "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
         wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+        check_apt_locks
         apt-get update -y
+        check_apt_locks
         apt-get install -y postgresql-client-9.6
     fi
 
@@ -188,27 +203,37 @@ EOF
     
     # install pre-requisites
     # apt-get install -y --fix-missing python-software-properties unzip
+    check_apt_locks
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
+    check_apt_locks
     sudo apt-get -y update > /dev/null 2>&1
+    check_apt_locks
      sudo apt-get -y install software-properties-common
+     check_apt_locks
     sudo apt-get -y install unzip
 
 
     # install the entire stack
     # passing php versions $phpVersion
+    check_apt_locks
     apt-get -y --force-yes install nginx php$phpVersion-fpm php$phpVersion php$phpVersion-cli php$phpVersion-curl php$phpVersion-zip >> /tmp/apt5.log
 
     # LAMP requirements
+    check_apt_locks
     apt-get -y update > /dev/null
     # passing php versions $phpVersion
+    check_apt_locks
     apt-get install -y --force-yes php$phpVersion-common php$phpVersion-soap php$phpVersion-json php$phpVersion-redis php$phpVersion-bcmath php$phpVersion-gd php$phpVersion-xmlrpc php$phpVersion-intl php$phpVersion-xml php$phpVersion-bz2 php-pear php$phpVersion-mbstring php$phpVersion-dev mcrypt >> /tmp/apt6.log
     PhpVer=$(get_php_version)
     if [ $dbServerType = "mysql" ]; then
+        check_apt_locks
         apt-get install -y --force-yes php$phpVersion-mysql
     elif [ $dbServerType = "mssql" ]; then
+        check_apt_locks
         apt-get install -y libapache2-mod-php$phpVersion  # Need this because install_php_mssql_driver tries to update apache2-mod-php settings always (which will fail without this)
         install_php_mssql_driver
     else
+        check_apt_locks
         apt-get install -y --force-yes php$phpVersion-pgsql
     fi
 
