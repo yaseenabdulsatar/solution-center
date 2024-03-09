@@ -314,7 +314,12 @@ EOF
         setup_html_local_copy_cron_job
      fi   
   fi
-
+cat > /etc/nginx/sites-enabled/default << EOF
+upstream backend {
+        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+} 
+EOF
   config_all_sites_on_vmss $htmlLocalCopySwitch $httpsTermination
 
   # php config 
@@ -343,12 +348,6 @@ EOF
 
   # update startup script to wait for certificate in /azlamp mount
   setup_azlamp_mount_dependency_for_systemd_service nginx || exit 1
-cat > /etc/nginx/sites-enabled/default << EOF
-upstream backend {
-        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
-} 
-EOF
   # restart nginx
   systemctl restart nginx
 
