@@ -726,7 +726,12 @@ function reset_all_sites_on_vmss
   local httpsTermination=${2}     # "VMSS" or "None"
 
   rm /etc/nginx/sites-enabled/*
-
+  cat > /etc/nginx/sites-enabled/default << EOF
+upstream backend {
+        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+} 
+EOF
   config_all_sites_on_vmss $htmlLocalCopySwitch $httpsTermination
 
   sudo systemctl restart nginx
