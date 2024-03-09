@@ -153,8 +153,8 @@ EOF
     apt-get -y --force-yes install rsyslog git                          >> /tmp/apt3.log
 
     if [ $fileServerType = "gluster" ]; then
-        apt-get -y --force-yes install glusterfs-client                 >> /tmp/apt3.log
         check_apt_locks
+        apt-get -y --force-yes install glusterfs-client                 >> /tmp/apt3.log
     elif [ "$fileServerType" = "azurefiles" ]; then
         # install azure cli & setup container
         AZ_REPO=$(lsb_release -cs)
