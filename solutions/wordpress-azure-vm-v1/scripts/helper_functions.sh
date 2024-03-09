@@ -121,8 +121,8 @@ function create_wpconfig {
   *
   */
   // ** Azure Database for MySQL server settings - You can get the following details from Azure Portal** //
-  //define('WP_HOME', '$wpHome' );
-  //define('WP_SITEURL', '$wpHome' );
+  define('WP_HOME', '$wpHome' );
+  define('WP_SITEURL', '$wpHome' );
   /** Database name for WordPress */
   define('DB_NAME', '$applicationDbName');
   /** username for MySQL database */
