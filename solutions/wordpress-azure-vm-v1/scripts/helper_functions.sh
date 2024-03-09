@@ -684,7 +684,7 @@ server {
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
  	location / {
-	    try_files $uri $uri/ /index.php?$args;
+	    try_files \$uri \$uri/ /index.php?\$args;
 	}
         root ${htmlRootDir};
         location ~* \.php$ {
@@ -848,7 +848,7 @@ server {
         access_log /var/log/nginx/access.log;
         error_log /var/log/nginx/error.log;
  	location / {
-	    try_files $uri $uri/ /index.php?$args;
+	    try_files \$uri \$uri/ /index.php?\$args;
 	}
         root ${htmlRootDir};
         location ~* \.php$ {
