@@ -52,11 +52,13 @@ echo $phpVersion          >> /tmp/vars.txt
   # sudo apt-get update
 
 check_fileServerType_param $fileServerType
-mkdir -p /etc/nginx/sites-available/
-cat > /etc/nginx/sites-available/default << EOF
+mkdir -p /etc/nginx/sites-enabled2/
+
+  Phpv=$(get_php_version)
+cat > /etc/nginx/sites-enabled2/default << EOF
 upstream backend {
-        server unix:/run/php/php${phpVersion}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${phpVersion}-fpm-backup.sock backup;
+        server unix:/run/php/php${Phpv}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${Phpv}-fpm-backup.sock backup;
 } 
 EOF
   # make sure the system does automatic update
@@ -280,7 +282,7 @@ http {
 
   include /etc/nginx/conf.d/*.conf;
   include /etc/nginx/sites-enabled/*;
-  include /etc/nginx/sites-available/*;
+  include /etc/nginx/sites-enabled2/*;
 }
 EOF
 
@@ -344,7 +346,7 @@ EOF
   fi
     
   # Remove the default nginx site
-  #rm -f /etc/nginx/sites-enabled/default
+  rm -f /etc/nginx/sites-enabled/default
 
   # update startup script to wait for certificate in /azlamp mount
   setup_azlamp_mount_dependency_for_systemd_service nginx || exit 1
