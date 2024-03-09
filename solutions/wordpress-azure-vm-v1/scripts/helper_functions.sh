@@ -611,7 +611,9 @@ function config_one_site_on_vmss
   local certsDir="/azlamp/certs/$siteFQDN"
   local PhpVer=$(get_php_version)
 if [ "$(ls $certsDir)" != "" ]; then
-  mkdir $certsDir
+  if [ ! "$certsDir" ]; then
+     mkdir $certsDir
+  fi
   generate_sslcerts $siteFQDN
 fi
   if [ "$httpsTermination" = "VMSS" ]; then
@@ -774,7 +776,9 @@ function create_per_site_nginx_conf_on_controller
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
     local htmlRootDir="/var/www/html/$siteFQDN"
 if [ "$(ls $certsDir)" != "" ]; then
-   mkdir $certsDir
+  if [ ! "$certsDir" ]; then
+     mkdir $certsDir
+  fi
   generate_sslcerts $siteFQDN
 fi
     if [ "$httpsTermination" = "VMSS" ]; then
