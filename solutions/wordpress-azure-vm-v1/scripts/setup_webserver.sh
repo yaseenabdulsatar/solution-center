@@ -397,12 +397,12 @@ EOF
 # Restart php-fpm
 systemctl restart php${PhpVer}-fpm
 
-echo "### Script End `date`###"
-
-}  2>&1 | tee /tmp/setup.log
  sudo find /var/www/ -type d -exec chmod 750 {} \;
  sudo find /var/www/ -type f -exec chmod 640 {} \;
  sudo chown -R www-data:www-data /var/www
  sudo chown -R www-data:www-data /azlamp
  sudo find /azlamp/ -type d -exec chmod 750 {} \;
  sudo find /azlamp/ -type f -exec chmod 640 {} \;
+echo "### Script End `date`###"
+
+}  2>&1 | tee /tmp/setup.log
