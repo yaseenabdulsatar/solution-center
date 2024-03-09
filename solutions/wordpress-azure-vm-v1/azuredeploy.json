@@ -178,9 +178,10 @@
             "allowedValues": [
                 "7.2",
                 "7.3",
-                "7.4"
+                "7.4",
+                "8.2"
             ],
-            "defaultValue": "7.4",
+            "defaultValue": "8.2",
             "metadata": {
                 "description": "php version"
             },
