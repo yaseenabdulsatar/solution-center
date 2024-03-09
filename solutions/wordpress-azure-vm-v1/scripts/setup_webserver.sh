@@ -106,7 +106,6 @@ check_fileServerType_param $fileServerType
     graphviz \
     aspell \
     php$phpVersion-soap \
-    php$phpVersion-json \
     php$phpVersion-redis \
     php$phpVersion-bcmath \
     php$phpVersion-gd \
@@ -168,7 +167,7 @@ EOF
 
   # install the base stack
   # passing php versions $phpVersion
-  # apt-get -y install nginx php$phpVersion php$phpVersion-fpm php$phpVersion-cli php$phpVersion-curl php$phpVersion-zip php-pear php$phpVersion-mbstring php$phpVersion-dev mcrypt php$phpVersion-soap php$phpVersion-json php$phpVersion-redis php$phpVersion-bcmath php$phpVersion-gd php$phpVersion-pgsql php$phpVersion-mysql php$phpVersion-xmlrpc php$phpVersion-intl php$phpVersion-xml php$phpVersion-bz2
+  # apt-get -y install nginx php$phpVersion php$phpVersion-fpm php$phpVersion-cli php$phpVersion-curl php$phpVersion-zip php-pear php$phpVersion-mbstring php$phpVersion-dev mcrypt php$phpVersion-soap  php$phpVersion-redis php$phpVersion-bcmath php$phpVersion-gd php$phpVersion-pgsql php$phpVersion-mysql php$phpVersion-xmlrpc php$phpVersion-intl php$phpVersion-xml php$phpVersion-bz2
   apt-get -y install nginx php$phpVersion-fpm
 
   # MSSQL
