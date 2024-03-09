@@ -298,8 +298,7 @@ function create_azure_files_share
     az storage share create \
         --name $shareName \
         --account-name $storageAccountName \
-        --account-key $storageAccountKey \
-        --quota $fileServerDiskSize
+        --account-key $storageAccountKey 
 }
 
 function setup_and_mount_gluster_share
