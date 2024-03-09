@@ -68,13 +68,14 @@ check_fileServerType_param $fileServerType
   echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |  tee /etc/apt/sources.list.d/azure-cli.list
 
   # add PHP-FPM repository 
+  check_apt_locks
   add-apt-repository ppa:ondrej/php -y > /dev/null 2>&1
-
+ check_apt_locks
   apt-get -qq -o=Dpkg::Use-Pty=0 update 
 
   # install pre-requisites including VARNISH and PHP-FPM
   export DEBIAN_FRONTEND=noninteractive
-
+  check_apt_locks
   apt-get --yes \
     --no-install-recommends \
     -qq -o=Dpkg::Use-Pty=0 \
@@ -158,16 +159,20 @@ EOF
     # apt-get -y install glusterfs-client
 
     add-apt-repository ppa:gluster/glusterfs-3.10 -y
+    check_apt_locks
     apt-get -y update
+    check_apt_locks
     apt-get -y -qq -o=Dpkg::Use-Pty=0 install glusterfs-client
   elif [ "$fileServerType" = "azurefiles" ]; then
     #apt-get -y install cifs-utils
+    check_apt_locks
     apt-get -y -qq -o=Dpkg::Use-Pty=0 install cifs-utils
   fi
 
   # install the base stack
   # passing php versions $phpVersion
   # apt-get -y install nginx php$phpVersion php$phpVersion-fpm php$phpVersion-cli php$phpVersion-curl php$phpVersion-zip php-pear php$phpVersion-mbstring php$phpVersion-dev mcrypt php$phpVersion-soap  php$phpVersion-redis php$phpVersion-bcmath php$phpVersion-gd php$phpVersion-pgsql php$phpVersion-mysql php$phpVersion-xmlrpc php$phpVersion-intl php$phpVersion-xml php$phpVersion-bz2
+  check_apt_locks
   apt-get -y install nginx php$phpVersion-fpm
 
   # MSSQL
