@@ -283,7 +283,7 @@ EOF
   if [ "$htmlLocalCopySwitch" = "true" ]; then
     if [ "$fileServerType" = "azurefiles" ]; then
         mkdir -p /var/www/html
-        # rsync -av --delete /azlamp/html/. /var/www/html
+        rsync -av --delete /azlamp/html/. /var/www/html
         ACCOUNT_KEY="$storageAccountKey"
         NAME="$storageAccountName"
         END=`date -u -d "60 minutes" '+%Y-%m-%dT%H:%M:00Z'`
@@ -307,8 +307,8 @@ EOF
     fi
     if [ "$fileServerType" = "nfs" -o "$fileServerType" = "nfs-ha" -o "$fileServerType" = "nfs-byo" -o "$fileServerType" = "gluster" ]; then
         mkdir -p /var/www/html
-        #rsync -av --delete /azlamp/html/. $htmlRootDir
-        sudo ln -s /azlamp/html /var/www/html
+        rsync -av --delete /azlamp/html/. $htmlRootDir
+        #sudo ln -s /azlamp/html /var/www/html
         chown www-data:www-data -R $htmlRootDir && sync
         setup_html_local_copy_cron_job
      fi   
