@@ -561,7 +561,8 @@ if [ -f "$SERVER_TIMESTAMP_FULLPATH" ]; then
       truncate -s 0 $SYNC_LOG_FULLPATH
     fi
     echo \$(date +%Y%m%d%H%M%S) >> $SYNC_LOG_FULLPATH
-    rsync -av --delete /azlamp/html/. /var/www/html >> $SYNC_LOG_FULLPATH
+    #rsync -av --delete /azlamp/html/. /var/www/html >> $SYNC_LOG_FULLPATH
+    sudo ln -s /azlamp/html/ /var/www/html/
   fi
 else
   logger -p local2.notice -t azlamp "Remote timestamp file ($SERVER_TIMESTAMP_FULLPATH) does not exist. Is /azlamp mounted? Exiting with error."
