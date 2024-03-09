@@ -224,6 +224,7 @@ function generate_sslcerts {
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $path/nginx.key -out $path/nginx.crt -subj "/C=US/ST=WA/L=Redmond/O=IT/CN=$1"
     chmod 400 $path/nginx.*
     chown www-data:www-data $path/nginx.*
+    mkdir -p /azlamp/data/$1
     chown -R www-data:www-data /azlamp/data/$1
 }
 
