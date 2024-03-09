@@ -7,7 +7,8 @@ function get_setup_params_from_configs_json
     local configs_json_path=${1}    # E.g., /var/lib/cloud/instance/lamp_on_azure_configs.json
 
     # (dpkg -l jq &> /dev/null) || (apt -y update; apt -y install jq)
-    # Added curl command to download jq.
+    # Added curl command to download jq
+    check_apt_locks.
     sudo apt-get install jq -y
     # Wait for the cloud-init write-files user data file to be generated (just in case)
     local wait_time_sec=0
@@ -249,12 +250,20 @@ wpDbUserPass: $wpDbUserPass
 EOF
 }
 
+function check_apt_locks {
+    while fuser /var/lib/dpkg/lock >/dev/null 2>&1 || fuser /var/lib/apt/lists/lock >/dev/null 2>&1 || fuser /var/cache/apt/archives/lock >/dev/null 2>&1; do
+        echo "APT is running. Waiting..."
+        sleep 5
+    done
+}
 function install_php_mssql_driver
 {
     # Download and build php/mssql driver
     /usr/bin/curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
     /usr/bin/curl https://packages.microsoft.com/ig/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-    sudo apt-get update
+    check_apt_locks
+    sudo apt-get update -y
+    check_apt_locks
     sudo ACCEPT_EULA=Y apt-get install msodbcsql mssql-tools unixodbc-dev -y
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
@@ -386,6 +395,7 @@ function create_raid0_ubuntu {
     if [ $_RET -eq 1 ];
     then 
         echo "installing mdadm"
+	check_apt_locks
         sudo apt-get -y -q install mdadm
     fi
     echo "Creating raid0"
@@ -477,6 +487,7 @@ function configure_nfs_server_and_export {
     local MOUNTPOINT=${1}     # E.g., /azlamp
 
     echo "Installing nfs server..."
+    check_apt_locks
     apt install -y nfs-kernel-server
 
     echo "Exporting ${MOUNTPOINT}..."
@@ -493,6 +504,7 @@ function configure_nfs_client_and_mount0 {
     local NFS_HOST_EXPORT_PATH=${1}   # E.g., controller-vm-ab12cd:/azlamp or 172.16.3.100:/drbd/data
     local MOUNTPOINT=${2}             # E.g., /azlamp
 
+    check_apt_locks
     apt install -y nfs-common
     mkdir -p ${MOUNTPOINT}
 
