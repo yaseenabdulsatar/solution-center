@@ -98,7 +98,7 @@ function download_wordpress {
     mv $wordpressPath/wordpress $wordpressPath/$siteFQDN
 }
 
-function create_wpig {
+function create_wpconfig {
     local dbIP=$1
     local applicationDbName=$2
     local dbadminloginazure=$3
