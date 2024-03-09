@@ -57,8 +57,8 @@ mkdir -p /etc/nginx/sites-enabled2/
   Phpv=$(get_php_version)
 cat > /etc/nginx/sites-enabled2/default << EOF
 upstream backend {
-        server unix:/run/php/php${Phpv}-fpm.sock fail_timeout=1s;
-        server unix:/run/php/php${Phpv}-fpm-backup.sock backup;
+        server unix:/run/php/php$Phpv-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php$Phpv-fpm-backup.sock backup;
 } 
 EOF
   # make sure the system does automatic update
