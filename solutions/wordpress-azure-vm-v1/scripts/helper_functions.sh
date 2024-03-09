@@ -622,7 +622,7 @@ function config_one_site_on_vmss
 
   local certsDir="/azlamp/certs/$siteFQDN"
   local PhpVer=$(get_php_version)
-if [ "$(ls $certsDir)" != "" ]; then
+if [ "$(ls $certsDir)" = "" ]; then
   if [ ! "$certsDir" ]; then
      mkdir $certsDir
   fi
@@ -791,7 +791,7 @@ function create_per_site_nginx_conf_on_controller
     local htmlDir=${3}          # E.g., /azlamp/html/site1.org
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
     local htmlRootDir="/var/www/html/$siteFQDN"
-if [ "$(ls $certsDir)" != "" ]; then
+if [ "$(ls $certsDir)" = "" ]; then
   if [ ! "$certsDir" ]; then
      mkdir $certsDir
   fi
