@@ -108,7 +108,7 @@ function create_wpconfig {
     
     SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/) 
 
-    cat <<EOF >/azlamp/html/$siteFQDN/wp-ig.php
+    cat <<EOF >/azlamp/html/$siteFQDN/wp-config.php
   <?php
   /**
   * Following igration file will be updated in the wordpress folder in runtime 
