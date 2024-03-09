@@ -53,7 +53,13 @@ echo $phpVersion          >> /tmp/vars.txt
 
 check_fileServerType_param $fileServerType
 
-
+mkdir -p /etc/nginx/sites-enabled/
+cat > /etc/nginx/sites-enabled/default << EOF
+upstream backend {
+        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+} 
+EOF
   # make sure the system does automatic update
   # apt-get -y update
   # TODO: ENSURE THIS IS CONFIGURED CORRECTLY
