@@ -605,7 +605,7 @@ function config_one_site_on_vmss
   if [ "$htmlLocalCopySwitch" = "true" ]; then
     local htmlRootDir="/azlamp/html/$siteFQDN"
   else
-    local htmlRootDir="/azlamp/html/$siteFQDN"
+    local htmlRootDir="/var/www/html/$siteFQDN"
   fi
 
   local certsDir="/azlamp/certs/$siteFQDN"
@@ -772,7 +772,7 @@ function create_per_site_nginx_conf_on_controller
     local httpsTermination=${2} # "None", "VMSS", etc
     local htmlDir=${3}          # E.g., /azlamp/html/site1.org
     local certsDir=${4}         # E.g., /azlamp/certs/site1.org
-    local htmlRootDir="/azlamp/html/$siteFQDN"
+    local htmlRootDir="/var/www/html/$siteFQDN"
 if [ "$(ls $certsDir)" != "" ]; then
    mkdir $certsDir
   generate_sslcerts $siteFQDN
