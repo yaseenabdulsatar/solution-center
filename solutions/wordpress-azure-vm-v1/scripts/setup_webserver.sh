@@ -307,6 +307,7 @@ EOF
     fi
     if [ "$fileServerType" = "nfs" -o "$fileServerType" = "nfs-ha" -o "$fileServerType" = "nfs-byo" -o "$fileServerType" = "gluster" ]; then
         #mkdir -p /var/www/html
+        sudo rm -dfr /var/www/html
         #rsync -av --delete /azlamp/html/. $htmlRootDir
         sudo ln -s /azlamp/html/ /var/www/html/
         chown www-data:www-data -R $htmlRootDir && sync
