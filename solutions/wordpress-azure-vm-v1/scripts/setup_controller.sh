@@ -176,7 +176,18 @@ EOF
     sudo add-apt-repository ppa:ondrej/php -y
     check_apt_locks
     sudo apt-get update -y
+mkdir -p /etc/nginx/sites-enabled2/
 
+  PhpVer=$(get_php_version)
+  if [ "$PhpVer" = "" ]; then
+    PhpVer=8.2
+  fi
+cat > /etc/nginx/sites-enabled2/default << EOF
+upstream backend {
+        server unix:/run/php/php${PhpVer}-fpm.sock fail_timeout=1s;
+        server unix:/run/php/php${PhpVer}-fpm-backup.sock backup;
+} 
+EOF
     # make sure system does automatic updates and fail2ban
     export DEBIAN_FRONTEND=noninteractive
     check_apt_locks
