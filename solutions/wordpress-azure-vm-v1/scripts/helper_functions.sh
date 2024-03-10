@@ -727,13 +727,17 @@ server {
           fastcgi_buffers 16 16k;
           fastcgi_buffer_size 32k;
           fastcgi_param   SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-          # fastcgi_pass unix:/run/php/php${PhpVer}-fpm.sock;
+          fastcgi_pass unix:/run/php/php${PhpVer}-fpm.sock;
           fastcgi_pass backend;
           fastcgi_read_timeout 3600;
           fastcgi_index index.php;
           include fastcgi_params;
         }
 }
+EOF
+  fi
+
+  cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
 	      index index.php index.html index.htm;
@@ -900,6 +904,10 @@ server {
           include fastcgi_params;
         }
 }
+EOF
+  fi
+
+  cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
 	      index index.php index.html index.htm;
