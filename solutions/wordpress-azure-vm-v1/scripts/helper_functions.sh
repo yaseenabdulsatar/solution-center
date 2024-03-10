@@ -111,7 +111,6 @@ function create_wpconfig {
     if [ $table_prefix = "" ]; then
         table_prefix=wp_
     fi
-    table_prefix=$table_prefix_
     cat <<EOF >/azlamp/html/$siteFQDN/wp-config.php
   <?php
   /**
