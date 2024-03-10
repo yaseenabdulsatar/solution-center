@@ -21,12 +21,9 @@
 # SOFTWARE.
 
 set -ex
-set -o pipefail
-
-export DEBIAN_FRONTEND=noninteractive
 
 echo "### Script Start `date`###"
-function main_operations {
+ {
 lamp_on_azure_configs_json_path=${1}
 number=$(ls /var/lib/waagent/custom-script/download/)
 cd /var/lib/waagent/custom-script/download/$number/
@@ -414,45 +411,4 @@ systemctl restart php${PhpVer}-fpm
  sudo find /azlamp/ -type f -exec chmod 640 {} \;
 echo "### Script End `date`###"
 
-} 
-
-retry_control() {
-    local max_attempts=5
-    local attempt_num=1
-    local exit_status
-
-    while [ $attempt_num -le $max_attempts ]; do
-        echo "Attempt $attempt_num of $max_attempts:"
-	main_operations $@  2>&1 | tee /tmp/setup.log
-        exit_status=$?
-        if [ $exit_status -eq 0 ]; then
-            echo "Script executed successfully."
-            break
-        else
-            echo "Script failed with exit status $exit_status."
-            if [ $attempt_num -lt $max_attempts ]; then
-                echo "Retrying in 5 seconds..."
-                sleep 5
-            fi
-            ((attempt_num++))
-        fi
-    done
-
-    if [ $attempt_num -gt $max_attempts ]; then
-        echo "Script failed after maximum attempts."
-        # If needed, handle maximum failure case here
-        return 1
-    fi
-}
-
-# Main script execution starts here
-# Check if the script is already being executed within the retry control mechanism
-if [ -z "${RETRY_CONTROL_ACTIVE}" ]; then
-    # Mark the script as being run under the retry control and export the flag
-    RETRY_CONTROL_ACTIVE=1 export RETRY_CONTROL_ACTIVE
-    retry_control "$@"
-    unset RETRY_CONTROL_ACTIVE  # Clear the flag once done
-else
-    # The script has been restarted by itself; run main operations directly
-    main_operations $@ 2>&1 | tee /tmp/setup.log
-fi
+}  2>&1 | tee /tmp/setup.log
