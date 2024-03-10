@@ -421,7 +421,7 @@ retry_control() {
 
     while [ $attempt_num -le $max_attempts ]; do
         echo "Attempt $attempt_num of $max_attempts:"
-	$(main_operations $@)  2>&1 | tee /tmp/setup.log
+	main_operations $@  2>&1 | tee /tmp/setup.log
         exit_status=$?
         if [ $exit_status -eq 0 ]; then
             echo "Script executed successfully."
@@ -452,5 +452,5 @@ if [ -z "${RETRY_CONTROL_ACTIVE}" ]; then
     unset RETRY_CONTROL_ACTIVE  # Clear the flag once done
 else
     # The script has been restarted by itself; run main operations directly
-    $(main_operations $@) 2>&1 | tee /tmp/setup.log
+    main_operations $@ 2>&1 | tee /tmp/setup.log
 fi
