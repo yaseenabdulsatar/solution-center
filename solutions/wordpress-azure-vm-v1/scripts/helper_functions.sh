@@ -71,6 +71,63 @@ function get_php_version {
     echo $_PHPVER
 }
 
+
+function duplication {
+cat <<EOF>> /azlamp/bin/update-vmss-config
+        $n)
+            . /azlamp/bin/utils.sh
+            reset_all_sites_on_vmss true VMSS
+        ;;
+EOF
+}
+
+function func {
+FOLDER_COUNT=$(find "/azlamp/bin/update-vmss-config" -mindepth 1 -maxdepth 1 -type d | wc -l)
+n=0
+until [[ "$n" = "$FOLDER_COUNT" ]]; do
+    n=$((n+1))
+    duplication
+done
+}
+
+function update_script {
+    # Increment the version number for the new duplication
+    let script_version++
+cat <<EOF > /azlamp/bin/update-vmss-config
+#!/bin/bash
+
+# Lookup the version number corresponding to the next process to be run on the machine
+VERSION=1
+VERSION_FILE=/root/vmss_config_version
+[ -f \${VERSION_FILE} ] && VERSION=\$(<\${VERSION_FILE})
+
+# iterate over processes that haven't yet been run on this machine, executing them one by one
+while true
+do
+    case \$VERSION in
+        # Uncomment the following block when adding/removing sites. Change the parameters if needed (default should work for most cases).
+        # true (or anything else): htmlLocalCopySwitch, VMSS (or anything else): https termination
+        # Add another block with the next version number for any further site addition/removal.
+
+EOF
+func
+cat <<EOF >> /azlamp/bin/update-vmss-config
+
+        *)
+            # nothing more to do so exit
+            exit 0
+        ;;
+    esac
+
+    # increment the version number and store it away to mark the successful end of the process
+    VERSION=\$(( \$VERSION + 1 ))
+    echo \$VERSION > \${VERSION_FILE}
+
+done
+EOF
+
+}
+
 function create_database {
     local dbIP=$1
     local dbadminloginazure=$2
