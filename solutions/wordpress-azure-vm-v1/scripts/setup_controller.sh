@@ -376,7 +376,8 @@ EOF
         # Generates the openSSL certificates
         generate_sslcerts $dnsSite
         # Generate the text file
-        generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
+        #generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
+        generate_text_file $wpPath $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
     }
 
     if [ "$cmsApplication" = "WordPress" ]; then
