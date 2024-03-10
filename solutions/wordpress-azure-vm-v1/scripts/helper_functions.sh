@@ -82,7 +82,7 @@ EOF
 }
 
 function func {
-FOLDER_COUNT=$(find "/azlamp/bin/update-vmss-config" -mindepth 1 -maxdepth 1 -type d | wc -l)
+FOLDER_COUNT=$(find "/azlamp/html" -mindepth 1 -maxdepth 1 -type d | wc -l)
 n=0
 until [[ "$n" = "$FOLDER_COUNT" ]]; do
     n=$((n+1))
