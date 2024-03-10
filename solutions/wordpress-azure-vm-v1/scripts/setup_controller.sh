@@ -21,6 +21,9 @@
 # SOFTWARE.
 
 set -ex
+set -o pipefail
+
+
 export DEBIAN_FRONTEND=noninteractive
 #parameters 
 function main_operations {
