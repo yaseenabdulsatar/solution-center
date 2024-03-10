@@ -96,19 +96,21 @@ echo "----------------------------------------------------------------------
 
 Important Guidelines:
 
-1) Please don't delete the primary Wordpress directory, identified as $wpPath. However, you can clear the contents within this directory if necessary.
+1) Please delete the primary Wordpress directory, identified as $wpPath.
 
-2) Wordpress Plugins install: ONLY USE the command 'wp' to update or install a plugins and core Wordpress installation.
+2) Wordpress Plugins install: It is more effictant to use the command 'wp' to update or install a plugins and core Wordpress installation.
 
-3) NOTE: It is imperative to execute the 'wp' command as the root user, AND you must include the flags --allow-root and --path=$wpPath. For example:
+3) NOTE: It is important to execute the 'wp' command as the root user, AND you must include the flags --allow-root and --path=$wpPath. For example:
+\$ sudo su
+\$ wp plugin install akismet --activate --path=$wpPath --allow-root
 
-sudo wp plugin install akismet --activate --path=$wpPath --allow-root
-
-4) NOT2: After the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
-
+4) NOTE: After the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
 sudo chown -R www-data:www-data /azlamp/
 
-5) SSL/TLS Certificate Considerations: Instead of installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
+for the time been, You can use this command. \$sudo bash [/home/$sshUsername/install-new-wordpress.sh] 
+
+5.1) to install a certificate for the website $siteFQDN you must add the certificate into the following folder [/azlamp/certs/$siteFQDN/] AND the certificate should be in the following name nginx.crt , nginx.kry
+5.2) SSL/TLS Certificate Considerations: Instead of installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
 
 . Navigate to the 'Front Door designer'.
 . Add your Custom Domain.
