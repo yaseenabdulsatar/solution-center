@@ -21,6 +21,8 @@
 # SOFTWARE.
 
 set -ex
+export DEBIAN_FRONTEND=noninteractive
+
 echo "### Script Start `date`###"
 function main_operations {
 lamp_on_azure_configs_json_path=${1}
