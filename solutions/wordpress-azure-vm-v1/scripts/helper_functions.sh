@@ -736,7 +736,6 @@ server {
 }
 EOF
   fi
-
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
@@ -769,7 +768,6 @@ server {
         }
 }
 EOF
-  fi
 } # function config_one_site_on_vmss
 
 function config_all_sites_on_vmss
@@ -940,7 +938,6 @@ server {
 }
 
 EOF
-fi
 }
 
 function create_per_site_nginx_ssl_certs_on_controller
