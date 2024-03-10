@@ -167,6 +167,7 @@ function install_wordpress_application2 {
         #generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
         generate_text_file $wpPath $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
     }
+    install_wordpress_application2
 
 EOF
     #Updating php sources
