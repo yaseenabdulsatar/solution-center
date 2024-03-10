@@ -379,6 +379,45 @@ EOF
         #generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
         generate_text_file $wpPath $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
     }
+    function install_wordpress_application2 {
+        local dnsSite=$siteFQDN
+        local wpTitle=LAMP-WordPress
+        local wpAdminUser=admin
+        local wpAdminPassword=$wpAdminPass
+        local wpAdminEmail=admin@$dnsSite
+        local wpPath=/azlamp/html/$dnsSite
+        local wpDbUserId=admin
+        local wpDbUserPass=$wpDbUserPass
+        local frontDoorFQDN=$frontDoorFQDN
+        local httpProtocol="http://"
+        local wpHome="$httpProtocol$frontDoorFQDN"
+
+        read -p "Name of the new website: " dnsSite
+        wpHome=$dnsSite
+        # Creates a Database for CMS application
+        #create_database $dbIP $dbadminloginazure $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass
+        # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
+        create_database $dbIP $dbadminlogin $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass 
+        # Download the WordPress application compressed file
+        download_wordpress $dnsSite $wpVersion
+        # Links the data content folder to shared folder.. /azlamp/data
+        linking_data_location $dnsSite
+        # Creates a wp-config file for WordPress
+        #create_wpconfig $dbIP $applicationDbName $dbadminloginazure $dbadminpass $dnsSite
+        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome
+        # Installs WP-CLI tool
+        install_wp_cli
+        # Install WordPress by using wp-cli commands
+        install_wordpress $dnsSite $wpTitle $wpAdminUser $wpAdminPassword $wpAdminEmail $wpPath
+        # Install W3 Total Cache plug-in
+        install_plugins $wpPath
+        # Generates the openSSL certificates
+        generate_sslcerts $dnsSite
+        # Generate the text file
+        #generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
+        read -p "Name of the new website: " public_ip
+        generate_text_file $wpPath $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
+    }
 
     if [ "$cmsApplication" = "WordPress" ]; then
         install_wordpress_application
