@@ -119,7 +119,7 @@ sudo chown -R www-data:www-data /azlamp/
 NOW run this command 'cat wordpress.txt' to get the credentials for the main wordpress installation, if that command fails then wait for 5 minutes and try again.
 "
 EOF
-cat > /home/$sshUsername/install-wordpress << EOF
+cat > /home/$sshUsername/install-new-wordpress.sh << EOF
 OLDPWD=\$(pwd)
 lamp_on_azure_configs_json_path=/var/lib/cloud/instance/lamp_on_azure_configs.json
 number=\$(ls /var/lib/waagent/custom-script/download/)
