@@ -143,7 +143,7 @@ function install_wordpress_application2 {
         read -p "Enter FQDN of the new website: " dnsSite
         wpHome="\$httpProtocol\$dnsSite"
         read -p "Title/name of the new website: " wpTitle
-        read -p "email address of the admin of the new website: " wpAdminEmail
+        read -p "Email address of the admin of the new website: " wpAdminEmail
         table_prefix=\$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
         # Creates a Database for CMS application
         #create_database \$dbIP \$dbadminloginazure \$dbadminpass \$applicationDbName \$wpDbUserId \$wpDbUserPass
