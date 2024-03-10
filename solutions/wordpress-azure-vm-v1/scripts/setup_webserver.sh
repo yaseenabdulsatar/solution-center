@@ -21,6 +21,8 @@
 # SOFTWARE.
 
 set -ex
+set -o pipefail
+
 export DEBIAN_FRONTEND=noninteractive
 
 echo "### Script Start `date`###"
