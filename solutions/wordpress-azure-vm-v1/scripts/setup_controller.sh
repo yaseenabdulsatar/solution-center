@@ -138,7 +138,7 @@ function install_wordpress_application2 {
         local frontDoorFQDN=\$frontDoorFQDN
         local httpProtocol="http://"
         local wpHome="\$httpProtocol\$frontDoorFQDN"
-	
+	clear
 	echo "-------------------------------------"
         read -p "Enter FQDN of the new website: " dnsSite
         wpHome="\$httpProtocol\$dnsSite"
