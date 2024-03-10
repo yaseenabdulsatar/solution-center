@@ -132,19 +132,22 @@ function install_wordpress_application2 {
         local wpAdminUser=admin
         local wpAdminPassword=\$wpAdminPass
         local wpAdminEmail=admin@\$dnsSite
+	
+        clear
+        echo "-------------------------------------"
+        read -p "Enter FQDN of the new website: " dnsSite
         local wpPath=/azlamp/html/\$dnsSite
         local wpDbUserId=admin
         local wpDbUserPass=\$wpDbUserPass
         local frontDoorFQDN=\$frontDoorFQDN
         local httpProtocol="http://"
         local wpHome="\$httpProtocol\$frontDoorFQDN"
-	clear
-	echo "-------------------------------------"
-        read -p "Enter FQDN of the new website: " dnsSite
         wpHome="\$httpProtocol\$dnsSite"
         read -p "Title/name of the new website: " wpTitle
         read -p "Email address of the admin of the new website: " wpAdminEmail
-        table_prefix=\$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
+	char=_
+        table_prefix=\$(cat /dev/urandom | tr -dc 'A-Z' | fold -w 4 | head -n 1)
+	table_prefix=$table_prefix$char
         # Creates a Database for CMS application
         #create_database \$dbIP \$dbadminloginazure \$dbadminpass \$applicationDbName \$wpDbUserId \$wpDbUserPass
         # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
