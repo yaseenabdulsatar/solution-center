@@ -119,56 +119,55 @@ sudo chown -R www-data:www-data /azlamp/
 NOW run this command 'cat wordpress.txt' to get the credentials for the main wordpress installation, if that command fails then wait for 5 minutes and try again.
 "
 EOF
-cat > /home/$sshUsername/install-wordpress << EOF
-OLDPWD=$(pwd)
+cat > /home/#sshUsername/install-wordpress << EOF
+OLDPWD=\$(pwd)
 lamp_on_azure_configs_json_path=/var/lib/cloud/instance/lamp_on_azure_configs.json
-number=$(ls /var/lib/waagent/custom-script/download/)
-cd /var/lib/waagent/custom-script/download/$number/
+number=\$(ls /var/lib/waagent/custom-script/download/)
+cd /var/lib/waagent/custom-script/download/\$number/
 . ./helper_functions.sh
-get_setup_params_from_configs_json $lamp_on_azure_configs_json_path || exit 99
-
+get_setup_params_from_configs_json \$lamp_on_azure_configs_json_path || exit 99
 function install_wordpress_application2 {
-        local dnsSite=$siteFQDN
+        local dnsSite=\$siteFQDN
         local wpTitle=LAMP-WordPress
         local wpAdminUser=admin
-        local wpAdminPassword=$wpAdminPass
-        local wpAdminEmail=admin@$dnsSite
-        local wpPath=/azlamp/html/$dnsSite
+        local wpAdminPassword=\$wpAdminPass
+        local wpAdminEmail=admin@\$dnsSite
+        local wpPath=/azlamp/html/\$dnsSite
         local wpDbUserId=admin
-        local wpDbUserPass=$wpDbUserPass
-        local frontDoorFQDN=$frontDoorFQDN
+        local wpDbUserPass=\$wpDbUserPass
+        local frontDoorFQDN=\$frontDoorFQDN
         local httpProtocol="http://"
-        local wpHome="$httpProtocol$frontDoorFQDN"
-
-        read -p "FQDN of the new website: " dnsSite
-        wpHome=$dnsSite
+        local wpHome="\$httpProtocol\$frontDoorFQDN"
+		echo "-------------------------------------"
+        read -p "Enter FQDN of the new website: " dnsSite
+        wpHome=\$dnsSite
         read -p "Title/name of the new website: " wpTitle
-        table_prefix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
+        table_prefix=\$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
         # Creates a Database for CMS application
-        #create_database $dbIP $dbadminloginazure $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass
+        #create_database \$dbIP \$dbadminloginazure \$dbadminpass \$applicationDbName \$wpDbUserId \$wpDbUserPass
         # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
-        create_database $dbIP $dbadminlogin $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass 
+        create_database \$dbIP \$dbadminlogin \$dbadminpass \$applicationDbName \$wpDbUserId \$wpDbUserPass 
         # Download the WordPress application compressed file
-        download_wordpress $dnsSite $wpVersion
+        download_wordpress \$dnsSite \$wpVersion
         # Links the data content folder to shared folder.. /azlamp/data
-        linking_data_location $dnsSite
+        linking_data_location \$dnsSite
         # Creates a wp-config file for WordPress
-        #create_wpconfig $dbIP $applicationDbName $dbadminloginazure $dbadminpass $dnsSite
-        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome $table_prefix
+        #create_wpconfig \$dbIP \$applicationDbName \$dbadminloginazure \$dbadminpass \$dnsSite
+        create_wpconfig \$dbIP \$applicationDbName \$dbadminlogin \$dbadminpass \$dnsSite  \$wpHome \$table_prefix
         # Installs WP-CLI tool
         install_wp_cli
         # Install WordPress by using wp-cli commands
-        install_wordpress $dnsSite $wpTitle $wpAdminUser $wpAdminPassword $wpAdminEmail $wpPath
+        install_wordpress \$dnsSite \$wpTitle \$wpAdminUser \$wpAdminPassword \$wpAdminEmail \$wpPath
         # Install W3 Total Cache plug-in
-        install_plugins $wpPath
+        install_plugins \$wpPath
         # Generates the openSSL certificates
-        generate_sslcerts $dnsSite
+        generate_sslcerts \$dnsSite
         # Generate the text file
-        #generate_text_file $dnsSite $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
-        generate_text_file $wpPath $wpAdminUser $wpAdminPassword $dbIP $wpDbUserId $wpDbUserPass $sshUsername
+        #generate_text_file \$dnsSite \$wpAdminUser \$wpAdminPassword \$dbIP \$wpDbUserId \$wpDbUserPass \$sshUsername
+        generate_text_file \$wpPath \$wpAdminUser \$wpAdminPassword \$dbIP \$wpDbUserId \$wpDbUserPass \$sshUsername
     }
     install_wordpress_application2
-
+cd \$OLDPWD
 EOF
     #Updating php sources
     check_apt_locks
