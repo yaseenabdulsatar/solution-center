@@ -76,7 +76,7 @@ function duplication {
 cat <<EOF>> /azlamp/bin/update-vmss-config
         $n)
             . /azlamp/bin/utils.sh
-            reset_all_sites_on_vmss true VMSS
+            reset_all_sites_on_vmss false VMSS
         ;;
 EOF
 }
