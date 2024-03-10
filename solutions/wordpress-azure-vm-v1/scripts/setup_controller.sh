@@ -149,7 +149,7 @@ function install_wordpress_application2 {
         read -p "Email address of the admin of the new website: " wpAdminEmail
 	char=_
         table_prefix=\$(cat /dev/urandom | tr -dc 'A-Z' | fold -w 4 | head -n 1)
-	table_prefix=$table_prefix$char
+	table_prefix=\$table_prefix\$char
         # Creates a Database for CMS application
         #create_database \$dbIP \$dbadminloginazure \$dbadminpass \$applicationDbName \$wpDbUserId \$wpDbUserPass
         # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
@@ -172,9 +172,9 @@ function install_wordpress_application2 {
         # Generate the text file
         #generate_text_file \$dnsSite \$wpAdminUser \$wpAdminPassword \$dbIP \$wpDbUserId \$wpDbUserPass \$sshUsername
         generate_text_file \$wpPath \$wpAdminUser \$wpAdminPassword \$dbIP \$wpDbUserId \$wpDbUserPass \$sshUsername
+        update_script
     }
     install_wordpress_application2
-    update_script
 cd \$OLDPWD
 EOF
     #Updating php sources
