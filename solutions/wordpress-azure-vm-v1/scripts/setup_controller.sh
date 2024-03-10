@@ -143,6 +143,7 @@ function install_wordpress_application2 {
         read -p "FQDN of the new website: " dnsSite
         wpHome=$dnsSite
         read -p "Title/name of the new website: " wpTitle
+        table_prefix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
         # Creates a Database for CMS application
         #create_database $dbIP $dbadminloginazure $dbadminpass $applicationDbName $wpDbUserId $wpDbUserPass
         # One off create for flexible server which doesn't use dbuser@host for connection, just uses dbuser instead 
@@ -153,7 +154,7 @@ function install_wordpress_application2 {
         linking_data_location $dnsSite
         # Creates a wp-config file for WordPress
         #create_wpconfig $dbIP $applicationDbName $dbadminloginazure $dbadminpass $dnsSite
-        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome
+        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome $table_prefix
         # Installs WP-CLI tool
         install_wp_cli
         # Install WordPress by using wp-cli commands
@@ -415,7 +416,7 @@ EOF
         linking_data_location $dnsSite
         # Creates a wp-config file for WordPress
         #create_wpconfig $dbIP $applicationDbName $dbadminloginazure $dbadminpass $dnsSite
-        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome
+        create_wpconfig $dbIP $applicationDbName $dbadminlogin $dbadminpass $dnsSite  $wpHome $table_prefix
         # Installs WP-CLI tool
         install_wp_cli
         # Install WordPress by using wp-cli commands
