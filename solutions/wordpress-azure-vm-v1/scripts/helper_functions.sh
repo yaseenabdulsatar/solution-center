@@ -105,9 +105,12 @@ function create_wpconfig {
     local dbadminpass=$4
     local siteFQDN=$5
     local wpHome=$6
+    local table_prefix=$7
     
     SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/) 
-
+    if [ $table_prefix = "" ]; then
+        table_prefix=wp_
+    fi
     cat <<EOF >/azlamp/html/$siteFQDN/wp-config.php
   <?php
   /**
@@ -153,7 +156,7 @@ function create_wpconfig {
   * You can have multiple installations in one database if you give each a unique prefix.
   * Only numbers, letters, and underscores are allowed.
   */
-  \$table_prefix  = 'wp_';
+  \$table_prefix  = '$table_prefix';
   /**
   * WordPress Localized Language, defaults language is English.
   *
