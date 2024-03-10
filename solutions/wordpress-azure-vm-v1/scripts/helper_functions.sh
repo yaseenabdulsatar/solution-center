@@ -930,8 +930,8 @@ server {
           include fastcgi_params;
         }
 }
-fi
 EOF
+fi
 }
 
 function create_per_site_nginx_ssl_certs_on_controller
