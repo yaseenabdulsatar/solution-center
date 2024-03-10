@@ -465,7 +465,7 @@ retry_control() {
 
     while [ $attempt_num -le $max_attempts ]; do
         echo "Attempt $attempt_num of $max_attempts:"
-        main_operations
+	$(main_operations $@)  2>&1 | tee /tmp/install.log
         exit_status=$?
         if [ $exit_status -eq 0 ]; then
             echo "Script executed successfully."
