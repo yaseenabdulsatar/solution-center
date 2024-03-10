@@ -904,7 +904,6 @@ server {
 }
 EOF
   fi
-
   cat <<EOF >> /etc/nginx/sites-enabled/${siteFQDN}.conf
 server {
         listen 80;
@@ -936,7 +935,6 @@ server {
           include fastcgi_params;
         }
 }
-
 EOF
 }
 
