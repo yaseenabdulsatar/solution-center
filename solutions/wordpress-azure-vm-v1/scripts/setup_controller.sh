@@ -175,6 +175,7 @@ function install_wordpress_application2 {
     }
     install_wordpress_application2
     /usr/local/bin/update_last_modified_time.azlamp.sh
+    sync
 cd \$OLDPWD
 EOF
     #Updating php sources
