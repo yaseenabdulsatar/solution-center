@@ -106,7 +106,7 @@ Important Guidelines:
 4) NOTE: After the installation or updating of any plugins, execute the following command to ensure the correct ownership of the Wordpress directory by the web server:
 sudo chown -R www-data:www-data /azlamp/
 
-for the time been, You can use this command. \$sudo bash [/home/$sshUsername/install-new-wordpress.sh] 
+for the time been, You can use this command. [ \$ sudo bash /home/$sshUsername/install-new-wordpress.sh] 
 
 5.1) to install a certificate for the website $siteFQDN you must add the certificate into the following folder [/azlamp/certs/$siteFQDN/] AND the certificate should be in the following name nginx.crt , nginx.kry
 5.2) SSL/TLS Certificate Considerations: Instead of installing a certificate directly on this VM and replicating it to the VM Scale Set (VMSS), it is recommended to leverage the 'Azure Front Door' resource, which should be deployed in conjunction with this VM. Within the Azure Front Door resource:
